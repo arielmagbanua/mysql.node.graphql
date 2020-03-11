@@ -10,6 +10,12 @@ const applicationRoutes = require('./routes/app');
 
 const app = express();
 
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('zest', 'homestead', 'secret', {
+  host: '192.168.10.10',
+  dialect: 'mysql',
+});
+
 // parse request body
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -21,4 +27,13 @@ app.use('/graphql', graphqlHttp({
   rootValue: graphqlResolver,
 }));
 
-app.listen(8080);
+app.listen(8080, () => {
+  sequelize
+    .authenticate()
+    .then(() => {
+      console.log('Connection has been established successfully.');
+    })
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    });
+});
