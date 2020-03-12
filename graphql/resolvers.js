@@ -4,7 +4,7 @@ module.exports = {
   async products() {
     return Product.findAll();
   },
-  async createProduct(args, req) {
-    return Product.create(args.productInput);
+  async createProduct({ productInput }, req) {
+    return Product.create(productInput);
   },
 };
