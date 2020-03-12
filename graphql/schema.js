@@ -46,10 +46,6 @@ module.exports = buildSchema(`
     supplier: Int
   }
   
-  type RootQuery {
-    products: [Product]!
-  }
-  
   input ProductInputData {
     description: String
     title: String!
@@ -94,8 +90,30 @@ module.exports = buildSchema(`
     supplier: Int
   }
   
+  input ProductQueryInput {
+    sku: ID
+    description: String
+    title: String
+    comment: String
+    price: Float
+    advanced_pricing: Int
+    wholesale: String
+    tax_category: String
+    weight: String
+    size: String
+    inactive: Int
+    product_type: String
+    last_modified: String
+    supplier: Int
+  }
+  
+  type RootQuery {
+    products: [Product]!
+    product(fields: ProductQueryInput): Product!
+  }
+  
   type RootMutation {
-    createProduct(productInput: ProductInputData): Product!
+    createProduct(productInput: ProductQueryInput): Product!
   }
   
   schema {
