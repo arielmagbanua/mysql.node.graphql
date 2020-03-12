@@ -20,6 +20,7 @@ app.use(applicationRoutes);
 app.use('/graphql', graphqlHttp({
   schema: graphqlSchema,
   rootValue: graphqlResolver,
+  graphiql: true,
 }));
 
 app.listen(8080, () => {
