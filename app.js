@@ -9,12 +9,7 @@ const graphqlResolver = require('./graphql/resolvers');
 const applicationRoutes = require('./routes/app');
 
 const app = express();
-
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('zest', 'homestead', 'secret', {
-  host: '192.168.10.10',
-  dialect: 'mysql',
-});
+const { sequelize } = require('./models/db');
 
 // parse request body
 app.use(bodyParser.urlencoded({extended: false}));
