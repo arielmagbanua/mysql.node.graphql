@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const { v5: uuidv5 } = require('uuid');
 
 module.exports = {
   async product({ fields }, req) {
@@ -10,6 +11,15 @@ module.exports = {
     return Product.findAll();
   },
   async createProduct({ productInput }, req) {
-    return Product.create(productInput);
+    const namespace = uuidv5('foo.bar.com', uuidv5.DNS);
+
+    // generate random unique sku
+    productInput.sku = uuidv5(productInput.title + Date.now(), namespace);
+
+    return Product.create(productInput)
+      .then((product) => {
+        return product;
+      }).catch((err) => console.log(err));
   },
 };
+
