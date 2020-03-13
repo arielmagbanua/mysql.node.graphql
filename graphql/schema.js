@@ -7,7 +7,7 @@ module.exports = buildSchema(`
     title: String!
     template_page: String
     comment: String
-    comment_right: String
+    comment_right: String!
     thumb: String
     image: String
     price: Float!
@@ -51,7 +51,7 @@ module.exports = buildSchema(`
     title: String!
     template_page: String
     comment: String
-    comment_right: String
+    comment_right: String!
     thumb: String
     image: String
     price: Float!
@@ -113,7 +113,7 @@ module.exports = buildSchema(`
   }
   
   type RootMutation {
-    createProduct(productInput: ProductQueryInput): Product!
+    createProduct(productInput: ProductInputData): Product!
   }
   
   schema {
