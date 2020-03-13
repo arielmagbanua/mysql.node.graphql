@@ -21,19 +21,46 @@
         </ul>
       </div>
     </nav>
+
+    <p>{{ allProducts }}</p>
   </div>
 </template>
 
 <script>
 import M from 'materialize-css/dist/js/materialize.min';
+import axios from 'axios';
 
 export default {
   name: 'App',
   methods: {
   },
+  computed: {
+    allProducts: async () => {
+      const allProductsPayload = {
+        query: '{ products { sku description comment comment_right price } }',
+      };
+
+      // Send a POST request
+      await axios({
+        method: 'post',
+        url: 'http://localhost:8823/graphql',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify(allProductsPayload),
+      })
+        .then((response) => {
+          console.log(response);
+        });
+
+      return 'awts';
+    },
+  },
   mounted() {
     // eslint-disable-next-line new-cap
     M.AutoInit();
+
+    // retrieve all products
   },
 };
 </script>

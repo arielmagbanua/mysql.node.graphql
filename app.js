@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const graphqlHttp = require('express-graphql');
 const graphqlSchema = require('./graphql/schema');
@@ -10,6 +11,8 @@ const applicationRoutes = require('./routes/app');
 
 const app = express();
 const { sequelize } = require('./models/db');
+
+app.use(cors());
 
 // parse request body
 app.use(bodyParser.urlencoded({extended: false}));
