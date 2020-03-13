@@ -114,6 +114,7 @@ module.exports = buildSchema(`
   
   type RootMutation {
     createProduct(productInput: ProductInputData): Product!
+    deleteProductBySKU(sku: String): Boolean!
   }
   
   schema {
