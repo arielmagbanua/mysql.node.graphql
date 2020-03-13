@@ -23,7 +23,7 @@ app.use('/graphql', graphqlHttp({
   graphiql: true,
 }));
 
-app.listen(8080, () => {
+app.listen(8823, () => {
   sequelize
     .authenticate()
     .then(() => {
