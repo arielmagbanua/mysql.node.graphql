@@ -8,7 +8,6 @@
               id="search"
               type="search"
               v-model="searchTerm"
-              v-focus="searchInputFull"
               @focus="searchInputFull = true"
               @blur="searchInputFull = false"
             >
@@ -23,6 +22,18 @@
           <li>
             <a href="#settings-modal" @click="openSettingsModal">
               <i class="material-icons">settings</i>
+            </a>
+          </li>
+          <li>
+            <a href="#settings-modal">
+
+              <div class="switch">
+                <label class="active-only">
+                  active only
+                  <input type="checkbox" checked="checked" v-model="activeOnly">
+                  <span class="lever"></span>
+                </label>
+              </div>
             </a>
           </li>
         </ul>
@@ -103,6 +114,7 @@ export default {
   data() {
     return {
       searchTerm: '',
+      activeOnly: true,
       products: [],
       fields: [
         'sku',
@@ -122,9 +134,9 @@ export default {
   },
   computed: {
     filteredProducts() {
-      console.log(this.searchTerm);
       return this.products.filter((product) => {
-        return this.searchTerm === '' ||
+        const searchTerm = (
+          this.searchTerm === '' ||
           (
             product.sku.toString()
               .toLowerCase()
@@ -138,7 +150,15 @@ export default {
             product.price.toString()
               .toLowerCase()
               .includes(this.searchTerm.toLowerCase())
-          );
+          )
+        );
+
+        let activeCondition = true;
+        if (this.activeOnly) {
+          activeCondition = product.inactive === 0;
+        }
+
+        return searchTerm && activeCondition;
       });
     },
   },
@@ -149,8 +169,9 @@ export default {
 
       const allProductsPayload = {
         query: `{
-          products {
+          products(activeOnly: false) {
             ${fields}
+            inactive
           }
         }`,
       };
@@ -192,8 +213,12 @@ export default {
 <style lang="scss" scoped>
 @import '~materialize-css/dist/css/materialize.min.css';
 
-div.nav-wrapper{
+div.nav-wrapper {
   overflow: hidden;
+}
+
+label.active-only {
+  color: white;
 }
 
 .modal {
