@@ -32,6 +32,9 @@
       <p>{{ description }}</p>
 
       <ul>
+        <li v-if="sku">
+          SKU: # <strong>{{ sku }}</strong>
+        </li>
         <li v-if="price">
           Price:
           <span :style="priceStyle">{{ price }} NZD</span>
@@ -75,7 +78,7 @@ export default {
   computed: {
     priceStyle() {
       // style pricing with strikethrough if there is new pricing
-      if (this.pricing > 0) {
+      if (this.pricing > 0 && this.pricing !== this.price) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         return {
           'text-decoration': 'line-through',
@@ -102,10 +105,9 @@ export default {
       if (this.hasDiscount) {
         // discount the pricing
         pricing = pricing - (pricing * (this.prodDiscount / 100));
-        console.log(this.prodDiscount);
       }
 
-      return pricing;
+      return pricing !== this.price ? pricing : '';
     },
   },
   mounted() {
@@ -113,5 +115,4 @@ export default {
     M.AutoInit();
   },
 };
-
 </script>
