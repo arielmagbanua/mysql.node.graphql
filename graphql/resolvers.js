@@ -16,8 +16,16 @@ module.exports = {
       where: { ...fields },
     });
   },
-  async products() {
-    return Product.findAll();
+  async products({ activeOnly = true }, req) {
+    const where = {};
+
+    if (activeOnly) {
+      where.inactive = 0;
+    }
+
+    return Product.findAll({
+      where: where,
+    });
   },
   async createProduct({ productInput }, req) {
     const namespace = uuidv5('foo.bar.com', uuidv5.DNS);

@@ -36,7 +36,8 @@
     ],
     "quotes": [
       "error",
-      "single"
+      "single",
+      { "allowTemplateLiterals": true, "avoidEscape": true }
     ],
     "semi": [
       "error",
@@ -45,6 +46,7 @@
     "object-curly-spacing": [
       "error",
       "always"
-    ]
+    ],
+    "max-len": ["warn", { "code":  120 }]
   }
 }
