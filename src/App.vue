@@ -2,9 +2,16 @@
   <div id="app">
     <nav>
       <div class="nav-wrapper">
-        <form class="left">
+        <form :class="searchInputFull ? '': 'left'">
           <div class="input-field">
-            <input id="search" type="search" v-model="searchTerm">
+            <input
+              id="search"
+              type="search"
+              v-model="searchTerm"
+              v-focus="searchInputFull"
+              @focus="searchInputFull = true"
+              @blur="searchInputFull = false"
+            >
             <label class="label-icon" for="search">
               <i class="material-icons">search</i>
             </label>
@@ -110,6 +117,7 @@ export default {
         'sale_price',
         'prod_discount',
       ],
+      searchInputFull: false,
     };
   },
   computed: {
@@ -184,8 +192,12 @@ export default {
 <style lang="scss" scoped>
 @import '~materialize-css/dist/css/materialize.min.css';
 
+div.nav-wrapper{
+  overflow: hidden;
+}
+
 .modal {
-  height: 50% !important ;
+  height: 50% !important;
 }
 
 #app {
