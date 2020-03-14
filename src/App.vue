@@ -21,27 +21,60 @@
         </ul>
       </div>
     </nav>
-
-    <p>{{ allProducts }}</p>
+    <div class="row">
+      <div class="col s3" v-for="product in products" :key="product.sku">
+        <product-card
+          :sku=product.sku
+          :description=product.description
+          :title=product.title
+          :thumb=product.thumb
+          :image=product.image
+          :size=product.size
+          :weight=product.weight
+          :url=product.url
+          :salePrice=product.sale_price
+          :prodDiscount=product.prod_discount
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import ProductCard from './components/ProductCard';
 import M from 'materialize-css/dist/js/materialize.min';
 import axios from 'axios';
 
 export default {
-  name: 'App',
-  methods: {
+  components: {
+    'product-card': ProductCard,
   },
-  computed: {
-    allProducts: async () => {
+  data() {
+    return {
+      products: [],
+    };
+  },
+  methods: {
+    fetchAllProducts() {
       const allProductsPayload = {
-        query: '{ products { sku description comment comment_right price } }',
+        query: `{
+          products {
+            sku
+            description
+            title
+            thumb
+            image
+            price
+            size
+            weight
+            url
+            sale_price
+            prod_discount
+          }
+        }`,
       };
 
-      // Send a POST request
-      await axios({
+      axios({
         method: 'post',
         url: 'http://localhost:8823/graphql',
         headers: {
@@ -50,10 +83,9 @@ export default {
         data: JSON.stringify(allProductsPayload),
       })
         .then((response) => {
-          console.log(response);
+          const { products } = response.data.data;
+          this.products = products;
         });
-
-      return 'awts';
     },
   },
   mounted() {
@@ -61,6 +93,7 @@ export default {
     M.AutoInit();
 
     // retrieve all products
+    this.fetchAllProducts();
   },
 };
 </script>
