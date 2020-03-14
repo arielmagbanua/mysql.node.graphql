@@ -108,7 +108,7 @@ module.exports = buildSchema(`
   }
   
   type RootQuery {
-    products: [Product]!
+    products(activeOnly: Boolean): [Product]!
     product(fields: ProductQueryInput): Product!
   }
   
