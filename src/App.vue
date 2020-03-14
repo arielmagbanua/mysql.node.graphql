@@ -4,7 +4,7 @@
       <div class="nav-wrapper">
         <form class="left">
           <div class="input-field">
-            <input id="search" type="search" required>
+            <input id="search" type="search" v-model="searchTerm">
             <label class="label-icon" for="search">
               <i class="material-icons">search</i>
             </label>
@@ -22,7 +22,7 @@
       </div>
     </nav>
     <div class="row">
-      <div class="col s3" v-for="product in products" :key="product.sku">
+      <div class="col s3" v-for="product in filteredProducts" :key="product.sku">
         <product-card
           :sku=product.sku
           :description=product.description
@@ -95,6 +95,7 @@ export default {
   },
   data() {
     return {
+      searchTerm: '',
       products: [],
       fields: [
         'sku',
@@ -110,6 +111,28 @@ export default {
         'prod_discount',
       ],
     };
+  },
+  computed: {
+    filteredProducts() {
+      console.log(this.searchTerm);
+      return this.products.filter((product) => {
+        return this.searchTerm === '' ||
+          (
+            product.sku.toString()
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase()) ||
+            product.description.toString()
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase()) ||
+            product.title.toString()
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase()) ||
+            product.price.toString()
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase())
+          );
+      });
+    },
   },
   methods: {
     fetchAllProducts() {
