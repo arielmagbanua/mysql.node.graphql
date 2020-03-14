@@ -29,6 +29,7 @@
           :title=product.title
           :thumb=product.thumb
           :image=product.image
+          :price=product.price
           :size=product.size
           :weight=product.weight
           :url=product.url
@@ -85,6 +86,7 @@ export default {
         .then((response) => {
           const { products } = response.data.data;
           this.products = products;
+          console.log(products);
         });
     },
   },
