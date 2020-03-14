@@ -20,21 +20,18 @@
 
         <ul class="right hide-on-med-and-down">
           <li>
-            <a href="#settings-modal" @click="openSettingsModal">
+            <a href="#settings-modal" @click.prevent="openSettingsModal">
               <i class="material-icons">settings</i>
             </a>
           </li>
           <li>
-            <a href="#settings-modal">
-
-              <div class="switch">
-                <label class="active-only">
-                  active only
-                  <input type="checkbox" checked="checked" v-model="activeOnly">
-                  <span class="lever"></span>
-                </label>
-              </div>
-            </a>
+            <div class="switch">
+              <label class="active-only">
+                active only
+                <input type="checkbox" checked="checked" v-model="activeOnly">
+                <span class="lever"></span>
+              </label>
+            </div>
           </li>
         </ul>
       </div>
@@ -96,7 +93,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        <button class="modal-close waves-effect waves-green btn-flat">Save</button>
       </div>
     </div>
   </div>
