@@ -14,7 +14,7 @@
 
         <ul class="right hide-on-med-and-down">
           <li>
-            <a href="#">
+            <a href="#settings-modal" @click="openSettingsModal">
               <i class="material-icons">settings</i>
             </a>
           </li>
@@ -38,6 +38,49 @@
         />
       </div>
     </div>
+
+    <div id="settings-modal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>Settings</h4>
+        <p>Choose what fields to include in GraphQL Query.</p>
+        <br>
+        <div class="container-fluid">
+          <div class="row">
+            <p v-for="field in [
+                  'sku',
+                  'description',
+                  'title',
+                  'thumb',
+                  'image',
+                  'price',
+                  'size',
+                  'weight',
+                  'url',
+                  'sale_price',
+                  'prod_discount'
+                ]"
+               class="col s3"
+               :key="field"
+            >
+              <label>
+                <input
+                  type="checkbox"
+                  class="filled-in"
+                  :id=field
+                  :value=field
+                  checked="checked"
+                  v-model=fields
+                />
+                <span>{{ field.toUpperCase() }}</span>
+              </label>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,24 +96,30 @@ export default {
   data() {
     return {
       products: [],
+      fields: [
+        'sku',
+        'description',
+        'title',
+        'thumb',
+        'image',
+        'price',
+        'size',
+        'weight',
+        'url',
+        'sale_price',
+        'prod_discount',
+      ],
     };
   },
   methods: {
     fetchAllProducts() {
+      let fields = this.fields.toString();
+      fields = fields.replace(/,/g, ' ');
+
       const allProductsPayload = {
         query: `{
           products {
-            sku
-            description
-            title
-            thumb
-            image
-            price
-            size
-            weight
-            url
-            sale_price
-            prod_discount
+            ${fields}
           }
         }`,
       };
@@ -89,6 +138,15 @@ export default {
           console.log(products);
         });
     },
+    openSettingsModal() {
+      const modalElement = this.$el.querySelector('#settings-modal');
+      // const instance = M.Modal.getInstance(modalElement);
+      const instance = M.Modal.init(modalElement, {
+        // fetch the products after close
+        onCloseEnd: this.fetchAllProducts,
+      });
+      instance.open();
+    },
   },
   mounted() {
     // eslint-disable-next-line new-cap
@@ -102,6 +160,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '~materialize-css/dist/css/materialize.min.css';
+
+.modal {
+  height: 50% !important ;
+}
 
 #app {
   font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
