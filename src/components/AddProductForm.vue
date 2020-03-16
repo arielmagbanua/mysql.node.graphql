@@ -1,8 +1,7 @@
 <template>
   <div id="addproducts-modal" class="modal modal-fixed-footer" ref="modal">
     <div class="modal-content">
-      <h4>Settings</h4>
-      <p>Choose what fields to include in GraphQL Query.</p>
+      <h4>Product</h4>
       <br>
       <div class="container-fluid">
         FORMS HERE
