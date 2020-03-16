@@ -4,7 +4,16 @@
       <h4>Product</h4>
       <br>
       <div class="container-fluid">
-        FORMS HERE
+        <div class="row">
+          <div class="input-field col s4">
+            <input id="title" type="text" class="validate">
+            <label class="active" for="title">Title</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="price" type="number" class="validate">
+            <label class="active" for="price">Price</label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
