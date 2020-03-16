@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <div id="settings-modal" class="modal modal-fixed-footer">
+    <div id="settings-modal" class="modal modal-fixed-footer" ref="settingsModal">
       <div class="modal-content">
         <h4>Settings</h4>
         <p>Choose what fields to include in GraphQL Query.</p>
@@ -197,8 +197,7 @@ export default {
         });
     },
     openSettingsModal() {
-      const modalElement = this.$el.querySelector('#settings-modal');
-      // const instance = M.Modal.getInstance(modalElement);
+      const modalElement = this.$refs.settingsModal;
       const instance = M.Modal.init(modalElement, {
         // fetch the products after close
         onCloseEnd: this.fetchAllProducts,
