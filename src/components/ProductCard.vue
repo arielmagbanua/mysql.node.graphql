@@ -51,7 +51,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @import '~materialize-css/dist/css/materialize.min.css';
 </style>
 
