@@ -20,11 +20,6 @@
 
         <ul class="right hide-on-med-and-down">
           <li>
-            <a href="#settings-modal" @click.prevent="openSettingsModal">
-              <i class="material-icons">settings</i>
-            </a>
-          </li>
-          <li>
             <div class="switch">
               <label class="active-only">
                 active only
@@ -32,6 +27,16 @@
                 <span class="lever"></span>
               </label>
             </div>
+          </li>
+          <li>
+            <a href="#settings-modal" @click.prevent="openSettingsModal">
+              <i class="material-icons">settings</i>
+            </a>
+          </li>
+          <li>
+            <a href="#" @click.prevent="openAddProductsModal">
+              <i class="material-icons">add</i>
+            </a>
           </li>
         </ul>
       </div>
@@ -96,17 +101,21 @@
         <button class="modal-close waves-effect waves-green btn-flat">Save</button>
       </div>
     </div>
+
+    <add-products-form ref="addProductForm"></add-products-form>
   </div>
 </template>
 
 <script>
 import ProductCard from './components/ProductCard';
+import AddProductsForm from './components/AddProductForm';
 import M from 'materialize-css/dist/js/materialize.min';
 import axios from 'axios';
 
 export default {
   components: {
     'product-card': ProductCard,
+    'add-products-form': AddProductsForm,
   },
   data() {
     return {
@@ -195,6 +204,10 @@ export default {
         onCloseEnd: this.fetchAllProducts,
       });
       instance.open();
+    },
+    openAddProductsModal() {
+      // Open add products modal
+      this.$refs.addProductForm.open();
     },
   },
   mounted() {
