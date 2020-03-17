@@ -13,11 +13,11 @@
             <input id="price" type="number" class="validate">
             <label class="active" for="price">Price</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <input id="thumb" type="text" class="validate">
             <label class="active" for="thumb">Thumbnail</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <input id="image" type="text" class="validate">
             <label class="active" for="image">Image</label>
           </div>
@@ -38,8 +38,20 @@
             <label for="comment">Comment</label>
           </div>
           <div class="input-field col s3">
+            <input id="sale_price" type="number" class="validate">
+            <label class="active" for="sale_price">Sale Price</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="prod_discount" type="number" class="validate">
+            <label class="active" for="prod_discount">Discount</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="product_type" type="text" class="validate">
+            <label class="active" for="product_type">Product Type</label>
+          </div>
+          <div class="input-field col s3">
             <input id="weight" type="text" class="validate">
-            <label class="active" for="image">Weight</label>
+            <label class="active" for="weight">Weight</label>
           </div>
           <div class="input-field col s3">
             <input id="size" type="text" class="validate">
@@ -57,18 +69,6 @@
               </label>
             </p>
           </div>
-          <div class="input-field col s3">
-            <input id="sale_price" type="number" class="validate">
-            <label class="active" for="sale_price">Sale Price</label>
-          </div>
-          <div class="input-field col s3">
-            <input id="prod_discount" type="number" class="validate">
-            <label class="active" for="prod_discount">Discount</label>
-          </div>
-          <div class="input-field col s3">
-            <input id="product_type" type="text" class="validate">
-            <label class="active" for="product_type">Product Type</label>
-          </div>
         </div>
       </div>
     </div>
@@ -81,6 +81,10 @@
 
 <style lang="scss" scoped>
 @import '~materialize-css/dist/css/materialize.min.css';
+
+#addproducts-modal {
+  height: 150% !important;
+}
 </style>
 
 <script>
