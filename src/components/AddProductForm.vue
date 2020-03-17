@@ -5,13 +5,69 @@
       <br>
       <div class="container-fluid">
         <div class="row">
-          <div class="input-field col s4">
+          <div class="input-field col s6">
             <input id="title" type="text" class="validate">
             <label class="active" for="title">Title</label>
           </div>
-          <div class="input-field col s4">
+          <div class="input-field col s6">
             <input id="price" type="number" class="validate">
             <label class="active" for="price">Price</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="thumb" type="text" class="validate">
+            <label class="active" for="thumb">Thumbnail</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="image" type="text" class="validate">
+            <label class="active" for="image">Image</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="image_large" type="text" class="validate">
+            <label class="active" for="image_large">Image Large</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="url" type="text" class="validate">
+            <label class="active" for="url">URL</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea" data-length="120"></textarea>
+            <label for="description">Description</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="comment" class="materialize-textarea" data-length="240"></textarea>
+            <label for="comment">Comment</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="weight" type="text" class="validate">
+            <label class="active" for="image">Weight</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="size" type="text" class="validate">
+            <label class="active" for="size">Size</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="color" type="text" class="validate">
+            <label class="active" for="color">Color</label>
+          </div>
+          <div class="input-field col s3">
+            <p>
+              <label>
+                <input id="inactive" type="checkbox" class="filled-in" checked="checked" />
+                <span>Inactive</span>
+              </label>
+            </p>
+          </div>
+          <div class="input-field col s3">
+            <input id="sale_price" type="number" class="validate">
+            <label class="active" for="sale_price">Sale Price</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="prod_discount" type="number" class="validate">
+            <label class="active" for="prod_discount">Discount</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="product_type" type="text" class="validate">
+            <label class="active" for="product_type">Product Type</label>
           </div>
         </div>
       </div>
