@@ -51,7 +51,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @import '~materialize-css/dist/css/materialize.min.css';
 </style>
 
@@ -97,16 +97,20 @@ export default {
     },
     pricing() {
       let pricing = this.price;
+
+      // replace regular pricing with sale or special pricing.
       if (this.hasSpecialPricing) {
         // this would be the new pricing
         pricing = this.salePrice;
       }
 
+      // calculate discounted pricing if there is a discount.
       if (this.hasDiscount) {
         // discount the pricing
         pricing = pricing - (pricing * (this.prodDiscount / 100));
       }
 
+      // return the pricing if not equal to the price otherwise return empty string.
       return pricing !== this.price ? pricing : '';
     },
   },

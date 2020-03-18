@@ -20,11 +20,6 @@
 
         <ul class="right hide-on-med-and-down">
           <li>
-            <a href="#settings-modal" @click.prevent="openSettingsModal">
-              <i class="material-icons">settings</i>
-            </a>
-          </li>
-          <li>
             <div class="switch">
               <label class="active-only">
                 active only
@@ -32,6 +27,16 @@
                 <span class="lever"></span>
               </label>
             </div>
+          </li>
+          <li>
+            <a href="#settings-modal" @click.prevent="openSettingsModal">
+              <i class="material-icons">settings</i>
+            </a>
+          </li>
+          <li>
+            <a href="#" @click.prevent="openAddProductsModal">
+              <i class="material-icons">add</i>
+            </a>
           </li>
         </ul>
       </div>
@@ -54,7 +59,7 @@
       </div>
     </div>
 
-    <div id="settings-modal" class="modal modal-fixed-footer">
+    <div id="settings-modal" class="modal modal-fixed-footer" ref="settingsModal">
       <div class="modal-content">
         <h4>Settings</h4>
         <p>Choose what fields to include in GraphQL Query.</p>
@@ -96,17 +101,24 @@
         <button class="modal-close waves-effect waves-green btn-flat">Save</button>
       </div>
     </div>
+
+    <add-products-form
+      ref="addProductForm"
+      :addProduct="addProduct">
+    </add-products-form>
   </div>
 </template>
 
 <script>
 import ProductCard from './components/ProductCard';
+import AddProductsForm from './components/AddProductForm';
 import M from 'materialize-css/dist/js/materialize.min';
 import axios from 'axios';
 
 export default {
   components: {
     'product-card': ProductCard,
+    'add-products-form': AddProductsForm,
   },
   data() {
     return {
@@ -160,6 +172,9 @@ export default {
     },
   },
   methods: {
+    addProduct(product) {
+      this.products.push(product);
+    },
     fetchAllProducts() {
       let fields = this.fields.toString();
       fields = fields.replace(/,/g, ' ');
@@ -188,13 +203,16 @@ export default {
         });
     },
     openSettingsModal() {
-      const modalElement = this.$el.querySelector('#settings-modal');
-      // const instance = M.Modal.getInstance(modalElement);
+      const modalElement = this.$refs.settingsModal;
       const instance = M.Modal.init(modalElement, {
         // fetch the products after close
         onCloseEnd: this.fetchAllProducts,
       });
       instance.open();
+    },
+    openAddProductsModal() {
+      // Open add products modal
+      this.$refs.addProductForm.open();
     },
   },
   mounted() {
