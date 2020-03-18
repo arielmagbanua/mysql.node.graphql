@@ -102,7 +102,10 @@
       </div>
     </div>
 
-    <add-products-form ref="addProductForm"></add-products-form>
+    <add-products-form
+      ref="addProductForm"
+      :addProduct="addProduct">
+    </add-products-form>
   </div>
 </template>
 
@@ -169,6 +172,9 @@ export default {
     },
   },
   methods: {
+    addProduct(product) {
+      this.products.push(product);
+    },
     fetchAllProducts() {
       let fields = this.fields.toString();
       fields = fields.replace(/,/g, ' ');
